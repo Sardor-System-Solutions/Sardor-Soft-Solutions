@@ -130,6 +130,10 @@
     "privacy": "Privacy",
     "terms": "Terms"
   },
+  "audio": {
+    "turnOn": "Enable ambient sound",
+    "turnOff": "Mute ambient sound"
+  },
   "lang": {
     "label": "Language",
     "en": "English",

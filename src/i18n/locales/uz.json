@@ -130,6 +130,10 @@
     "privacy": "Maxfiylik",
     "terms": "Shartlar"
   },
+  "audio": {
+    "turnOn": "Fon musiqasini yoqish",
+    "turnOff": "Ovozni oʻchirish"
+  },
   "lang": {
     "label": "Til",
     "en": "English",

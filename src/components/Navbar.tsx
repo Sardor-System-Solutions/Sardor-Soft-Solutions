@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, Volume2, VolumeX, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/button';
+import { useAmbientAudio } from '@/src/context/AmbientAudioContext';
 import { cn } from '@/lib/utils';
 
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -11,6 +12,7 @@ import { Logo } from './Logo';
 
 export default function Navbar() {
   const { t } = useTranslation();
+  const { isOn, toggle } = useAmbientAudio();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -51,6 +53,18 @@ export default function Navbar() {
             </a>
           ))}
           <LanguageSwitcher />
+          <Button
+            variant="outline"
+            size="icon"
+            className="shrink-0 border-border/80 bg-background/40"
+            type="button"
+            aria-pressed={isOn}
+            aria-label={isOn ? t('audio.turnOff') : t('audio.turnOn')}
+            title={isOn ? t('audio.turnOff') : t('audio.turnOn')}
+            onClick={toggle}
+          >
+            {isOn ? <Volume2 className="size-4" /> : <VolumeX className="size-4 opacity-80" />}
+          </Button>
           <Button size="lg" className="rounded-xl px-5 font-semibold" asChild>
             <a href="#contact">{t('nav.cta')}</a>
           </Button>
@@ -58,6 +72,17 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2 md:hidden">
           <LanguageSwitcher />
+          <Button
+            variant="outline"
+            size="icon"
+            className="shrink-0 border-border/80 bg-background/40"
+            type="button"
+            aria-pressed={isOn}
+            aria-label={isOn ? t('audio.turnOff') : t('audio.turnOn')}
+            onClick={toggle}
+          >
+            {isOn ? <Volume2 className="size-4" /> : <VolumeX className="size-4 opacity-80" />}
+          </Button>
           <Button
             variant="ghost"
             size="icon"

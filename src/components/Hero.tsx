@@ -1,6 +1,6 @@
 import type MuxPlayerElement from '@mux/mux-player';
 import MuxPlayer from '@mux/mux-player-react';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,12 @@ const MUX_PLAYBACK_ID = 'AKIkrWZorKEeQI024uCe01jjvgoPaMgZVe00MO8Vp1DpQs';
 export default function Hero() {
   const { t } = useTranslation();
   const muxRef = useRef<MuxPlayerElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -72]);
 
   const restartLoop = () => {
     const el = muxRef.current;
@@ -26,7 +32,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative -mt-px overflow-x-clip pt-28 pb-16 lg:min-h-[min(90vh,920px)] lg:pt-40 lg:pb-28">
+    <section
+      ref={sectionRef}
+      className="relative -mt-px overflow-x-clip pt-28 pb-16 lg:min-h-[min(90vh,920px)] lg:pt-40 lg:pb-28"
+    >
       <div className="pointer-events-none absolute -top-px right-0 bottom-0 left-0 z-0 overflow-hidden">
         <MuxPlayer
           ref={muxRef}
@@ -102,12 +111,13 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex justify-center lg:justify-end"
-          >
+          <motion.div style={{ y: parallaxY }} className="relative flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="relative flex justify-center lg:justify-end"
+            >
             <div className="accent-glow relative z-10 hidden w-full max-w-md rounded-2xl border border-border/80 bg-card/40 p-1 ring-1 ring-foreground/5 md:block md:max-w-lg">
               <div className="overflow-hidden rounded-[0.9rem] bg-background/80">
                 <div className="flex items-center gap-2 border-b border-border/80 px-4 py-2.5">
@@ -143,6 +153,7 @@ export default function Hero() {
               className="absolute top-1/2 left-1/2 -z-10 h-[min(100%,420px)] w-[min(100%,420px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[100px]"
               aria-hidden
             />
+            </motion.div>
           </motion.div>
         </div>
       </div>
