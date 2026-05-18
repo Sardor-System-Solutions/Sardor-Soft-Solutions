@@ -50,11 +50,10 @@ export default function Hero() {
           nohotkeys
           disablePseudoEnded
           proudlyDisplayMuxBadge={false}
-          className="absolute top-1/2 left-1/2 w-[min(180vw,320vh)] max-w-none -translate-x-1/2 -translate-y-1/2 sm:w-[min(140vw,260vh)] lg:w-[min(115vw,220vh)]"
+          className="absolute top-1/2 left-1/2 w-[min(180vw,320vh)] max-w-none -translate-x-1/2 -translate-y-1/2 sm:w-[min(140vw,260vh)] lg:w-[min(115vw,220vh)] hero-video"
           style={{
             aspectRatio: '13 / 5',
             ['--controls' as string]: 'none',
-            ['--media-object-fit' as string]: 'cover',
           }}
           onEnded={restartLoop}
         />

@@ -201,3 +201,25 @@
   --sidebar-border: rgba(255, 255, 255, 0.05);
   --sidebar-ring: #3b82f6;
 }
+
+/* Hero video: use contain on small screens to avoid cropping, cover on large */
+.hero-video {
+  --media-object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .hero-video {
+    --media-object-fit: cover;
+  }
+}
+/* Prefer centering the media object; adjust on small screens if needed */
+.hero-video {
+  --media-object-position: center center;
+  aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 1024px) {
+  .hero-video {
+    aspect-ratio: 13 / 5;
+  }
+}

@@ -42,6 +42,7 @@ export default function Technologies() {
         >
           {t('technologies.label')}
         </motion.p>
+
         <motion.div
           className="flex flex-wrap justify-center gap-x-10 gap-y-6 group"
           variants={list}
